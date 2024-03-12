@@ -1,24 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
+import { Alert, Box, CircularProgress, Snackbar } from "@mui/material";
+import { Routes, Route, Router, BrowserRouter, Navigate } from "react-router-dom";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { AuthProvider, useAuth } from "./hooks/useAuth";
+import { ProtectedRoute } from './components/ProtectedRoute';
+// import Profile from './pages/Profile';
+// import AppLayout from './components/AppLayout';
+// import Sidebar from './components/Sidebar';
+
+const LoginPage = lazy(() => import("./pages/Login"));
+const RegisterPage = lazy(() => import("./pages/Register"));
+const Logout = lazy(() => import("./pages/Logout"));
+const HomePage = lazy(() => import("./pages/Home"));
+const ErrorPage = lazy(() => import("./pages/Error"));
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+    <BrowserRouter>
+      <AuthProvider>
+        <Suspense
+          fallback={
+            <Box className="display-center">
+              <CircularProgress sx={{ margin: "auto" }} />
+            </Box>
+          }>
+
+          <Routes>
+            <Route path="/" exact element={<Navigate to="/login" />} />
+            <Route path="/login" exact element={<LoginPage />} />
+            <Route path="/register" exact element={<RegisterPage />} />
+            <Route path="/home" exact element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            } />
+            <Route path="*" exact element={<ErrorPage />} />
+          </Routes>
+        </Suspense>
+      </AuthProvider>
+
+    </BrowserRouter>
+
+
+
+
+
   );
 }
 

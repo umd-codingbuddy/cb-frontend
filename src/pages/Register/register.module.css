@@ -1,0 +1,15 @@
+.customLink {
+    color: #3A10E5;
+    /* Link color */
+    text-decoration: underline;
+    /* Underline the text */
+    cursor: pointer;
+    /* Show pointer cursor on hover */
+}
+
+.customLink:hover {
+    opacity: 0.7;
+    /* Change color on hover */
+    text-decoration: underline;
+    /* Keep underline on hover */
+}
