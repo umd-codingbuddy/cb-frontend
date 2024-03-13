@@ -38,6 +38,12 @@ export default function Login({ setLoggedIn }) {
     setPassword(event.target.value);
   }
 
+  const displaySnackBar = (snackType,message) => {
+    setSnackType(snackType);
+    setMessage(message);
+    setIsSnackbarOpen(true);
+  }
+
   const signin = async (event) => {
     event.preventDefault();
     // const hashedPassword = bcrypt.hashSync(password, salt);
@@ -64,18 +70,23 @@ export default function Login({ setLoggedIn }) {
     //     setIsSnackbarOpen(true);
     //   }
     // });
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      displaySnackBar('error','Kindly enter correct email address');
+      return;
+    }
+
     let response = sampleData['login'].response;
 
     if (response.status == 1) {
-      login(response.token);
-      // window.localStorage.setItem('token', response.token);
-      // window.location = '/home';
+      login(response.user);
     } else if (response.status == 2) {
-      setSnackType('error');
-      setMessage(response.errorMsg);
-      setIsSnackbarOpen(true);
+      displaySnackBar('error',"Kindly verify your email before logging in");
+    } else if (response.status == 3) {
+      displaySnackBar('error',response.errorMsg);
     }
-
 
   }
 
@@ -101,7 +112,7 @@ export default function Login({ setLoggedIn }) {
     setIsSnackbarOpen(true);
   }
 
-  const handleRegisterBtn = ()=>{
+  const handleRegisterBtn = () => {
     navigate("/register");
   }
 
@@ -142,7 +153,7 @@ export default function Login({ setLoggedIn }) {
             value={email}
             sx={{ width: "400px" }}
             onChange={onEmailChange}
-            placeholder="Email"
+            label="Email"
             required
           />
           <br /><br />
@@ -153,14 +164,12 @@ export default function Login({ setLoggedIn }) {
             name="password"
             value={password}
             onChange={onPasswordChange}
-            placeholder="Password"
+            label="Password"
             sx={{ width: "400px" }}
             required
           />
           <br /><br />
 
-          {/* <PrimaryBtn onClick={handleRegisterBtn}>Sign up</PrimaryBtn> */}
-          
           <PrimaryBtn
             className="button_style"
             variant="contained"
@@ -175,9 +184,7 @@ export default function Login({ setLoggedIn }) {
           <div>
             <p>
               Don't have an account?{' '}
-              <Link to="/register">
-                <span className={styles.customLink}>Sign up for free</span>
-              </Link>
+              <Link href="/register" className={styles.customLink}>Sign up for free</Link>
             </p>
           </div>
         </div>

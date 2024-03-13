@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Stack,
+    ToggleButton,
     ToggleButtonGroup,
     Typography,
     styled,
@@ -11,35 +12,26 @@ import styles from './header.module.css';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import BugReportIcon from '@mui/icons-material/BugReport';
-import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
-import MuiToggleButton from "@mui/material/ToggleButton";
-import { useLocation } from 'react-router-dom';
 import Person2Icon from '@mui/icons-material/Person2';
-import ReportIssue from '../ReportIssue';
+import { useAuth } from "../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import PrimaryBtn from "../PrimaryBtn";
 
 export default function Header() {
 
-    const ToggleButton = styled(MuiToggleButton)({
-        "&.Mui-selected, &.Mui-selected:hover": {
-            color: "white",
-            backgroundColor: '#295bcc',
-        }
-    });
-    const location = useLocation();
-
-    const [menu, setMenu] = useState('courses');
+    const navigate = useNavigate();
+    const [menu, setMenu] = useState('myCourse');
     const [role, setRole] = useState('');
 
+    const { user, logout } = useAuth();
+    const location = useLocation();
 
-    const logout = () => {
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('role');
-        window.location = '/login';
-    }
+
+
 
     const handleMenuChange = (value) => {
-        if( value!==undefined ){
-            window.location = `/${value}`
+        if (value !== undefined) {
+            navigate(`/${value}`);
         }
     };
 
@@ -48,45 +40,69 @@ export default function Header() {
         let pathArray = pathname.split('/');
         let lastSubpath = pathArray[pathArray.length - 1];
         setMenu(lastSubpath);
-        let role = window.localStorage.getItem('role');
-        setRole(role);
-
+        if (user != null) {
+            setRole(user.role);
+        }
     }, []);
 
+    const handleLogout = () => {
+        logout();
+    };
+
     return (
-        <Stack className={styles.headerContainer} flexDirection="row" alignContent="center" justifyContent="space-between">
+        <Stack className={styles.headerContainer} flexDirection="row" alignItems="center" justifyContent="left">
+            <Stack className={styles.logoContainer} flexDirection="row" alignItems="center" justifyContent="center">
+                <img className={styles.headerImage} src="./images/cb-logo.png" width={80} height={50} />
+                <span className={styles.headerText}>Coding Buddy</span>
+            </Stack>
             <Stack flexDirection="row" justifyContent="stretch">
-                <Typography variant='h4' className={styles.title}>AlgoLab</Typography>
                 <ToggleButtonGroup
                     value={menu}
                     exclusive
-                    onChange={(event)=>{handleMenuChange(event.target.value)}}
+                    className={styles.menuContainer}
+                    onChange={(event) => { handleMenuChange(event.target.value) }}
                 >
-                    <ToggleButton value="course" aria-label="left aligned">
-                        <LibraryBooksIcon onClick={()=>{handleMenuChange("course")}} />Course
+                    <ToggleButton value="myCourse" aria-label="left aligned"
+                        style={{
+                            color: 'black',
+                            border : "1px solid #111",
+                            backgroundColor: menu === 'myCourse' ? '#2c086f' : 'transparent',
+                        }}
+                    >
+                        My Courses
                     </ToggleButton>
-                    <ToggleButton value="feedback" aria-label="centered">
-                        <FeedbackIcon onClick={()=>{handleMenuChange("feedback")}} /> Feedback
+                    <ToggleButton value="allCourse" aria-label="centered"
+                        style={{
+                            color: 'black',
+                            border : "1px solid #111",
+                            backgroundColor: menu === 'allCourse' ? '#2c086f' : 'transparent',
+                        }}
+                    >
+                        All Courses
                     </ToggleButton>
-                    {
-                        role == 'ADMIN' &&
-                        <ToggleButton value="issue" aria-label="right aligned">
-                            <BugReportIcon onClick={()=>{handleMenuChange("issue")}} /> Issue
-                        </ToggleButton>
-                    }
-                    <ToggleButton value="profile" aria-label="justified">
-                        <Person2Icon onClick={()=>{handleMenuChange("profile")}} /> Profile
+                    <ToggleButton value="contact" aria-label="right aligned"
+                        style={{
+                            color: 'black',
+                            border : "1px solid #111",
+                            backgroundColor: menu === 'contact' ? '#2c086f' : 'transparent',
+                        }}
+                    >
+                        Contact
+                    </ToggleButton>
+                    <ToggleButton value="profile" aria-label="justified"
+                        style={{
+                            color: 'white',
+                            border : "1px solid #111",
+                            backgroundColor: menu === 'profile' ? '#2c086f' : 'transparent',
+                        }}
+                    >
+                        Profile
                     </ToggleButton>
                 </ToggleButtonGroup>
             </Stack>
 
-            <Stack flexDirection="row" justifyContent="center" gap={2}>
-                {
-                    role !== 'ADMIN' &&
-                    <ReportIssue></ReportIssue>
-                }
-
-                <Button sx={{ height: "40px" }} variant="contained" onClick={logout}>Logout</Button>
+            <Stack className={styles.logoutBtnContainer} flexDirection="row" alignItems="center" justifyContent="center" gap={2}>
+                <PrimaryBtn sx={{ height: "40px" }} variant="contained" onClick={handleLogout}>Logout</PrimaryBtn>
             </Stack>
 
         </Stack>

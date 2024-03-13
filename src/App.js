@@ -13,6 +13,7 @@ const RegisterPage = lazy(() => import("./pages/Register"));
 const Logout = lazy(() => import("./pages/Logout"));
 const HomePage = lazy(() => import("./pages/Home"));
 const ErrorPage = lazy(() => import("./pages/Error"));
+const ProfilePage = lazy(() => import("./pages/Profile"));
 
 function App() {
 
@@ -35,6 +36,11 @@ function App() {
             <Route path="/home" exact element={
               <ProtectedRoute>
                 <HomePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" exact element={
+              <ProtectedRoute>
+                <ProfilePage />
               </ProtectedRoute>
             } />
             <Route path="*" exact element={<ErrorPage />} />

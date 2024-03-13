@@ -17,7 +17,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function Register({ setLoggedIn }) {
 
-  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -121,10 +120,6 @@ export default function Register({ setLoggedIn }) {
 
   const navigate = useNavigate();
 
-  const onUsernameChange = (event) => {
-    setUserName(event.target.value);
-  }
-
   const onEmailChange = (event) => {
     setEmail(event.target.value);
   }
@@ -156,27 +151,26 @@ export default function Register({ setLoggedIn }) {
   const register = async () => {
 
     if (validateForm()) {
-      await backendCall.post('/api/v1/register',
-        {
-          username: username,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          role: role,
-          bio: bio
-        }
-      ).then((res) => {
-        window.localStorage.removeItem('token');
-        setLoggedIn(false);
-        navigate('/login', {
-          state: { isRegisterSuccess: true }
-        });
-      }).catch((err) => {
-        console.log('err : ', err);
-        setErrorMessage(err.response.data.error);
-        setIsErrSnackbarOpen(true);
-      });
+      // await backendCall.post('/api/v1/register',
+      //   {
+      //     password: password,
+      //     firstName: firstName,
+      //     lastName: lastName,
+      //     email: email,
+      //     role: role,
+      //     bio: bio
+      //   }
+      // ).then((res) => {
+      //   window.localStorage.removeItem('token');
+      //   setLoggedIn(false);
+      //   navigate('/login', {
+      //     state: { isRegisterSuccess: true }
+      //   });
+      // }).catch((err) => {
+      //   console.log('err : ', err);
+      //   setErrorMessage(err.response.data.error);
+      //   setIsErrSnackbarOpen(true);
+      // });
     }
   }
 
@@ -208,7 +202,7 @@ export default function Register({ setLoggedIn }) {
               sx={{ width: "180px" }}
               value={firstName}
               onChange={onFirstNameChange}
-              placeholder="First Name"
+              label="First Name"
               required
             />
             <TextField
@@ -217,7 +211,7 @@ export default function Register({ setLoggedIn }) {
               sx={{ width: "180px" }}
               value={lastName}
               onChange={onLastNameChange}
-              placeholder="Last Name"
+              label="Last Name"
               required
             />
 
@@ -226,11 +220,11 @@ export default function Register({ setLoggedIn }) {
           <TextField
             id="standard-basic"
             type="text"
-            name="username"
+            name="email"
             sx={{ width: "400px" }}
             value={email}
             onChange={onEmailChange}
-            placeholder="Email"
+            label="Email"
             required
             className=''
           />
@@ -242,7 +236,7 @@ export default function Register({ setLoggedIn }) {
             name="password"
             value={password}
             onChange={onPasswordChange}
-            placeholder="Password"
+            label="Password"
             required
           />
           <br /><br />
@@ -253,7 +247,7 @@ export default function Register({ setLoggedIn }) {
             name="confirm_password"
             value={confirmPassword}
             onChange={onConfirmPasswordChange}
-            placeholder="Confirm Password"
+            label="Confirm Password"
             required
           />
           <br /><br />
@@ -264,7 +258,7 @@ export default function Register({ setLoggedIn }) {
             value={role}
             sx={{ width: "400px" }}
             onChange={onRoleChange}
-            placeholder='Role'
+            label='Role'
           // variant='standard'
           >
             <MenuItem value="">Select Role</MenuItem>
@@ -280,7 +274,7 @@ export default function Register({ setLoggedIn }) {
             variant="contained"
             color="primary"
             size="small"
-            disabled={username === '' || password === ''}
+            disabled={email === '' || password === ''}
             onClick={register}
             sx={{ padding: "10px 20px" }}
           >
@@ -290,7 +284,7 @@ export default function Register({ setLoggedIn }) {
           <div>
             <p>
               Already have an account?{' '}
-              <Link to="/login">
+              <Link href="/login">
                 <span className={styles.customLink}>Login</span>
               </Link>
             </p>
