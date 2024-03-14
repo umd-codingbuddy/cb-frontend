@@ -1,7 +1,8 @@
 .headerContainer{
     width: 100%;
     padding: 10px;
-    border-bottom: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
+    background-color: #FFE0CC;
 }
 .title{
     padding: 0px 15px;

@@ -4,16 +4,15 @@ import { Routes, Route, Router, BrowserRouter, Navigate } from "react-router-dom
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { AuthProvider, useAuth } from "./hooks/useAuth";
 import { ProtectedRoute } from './components/ProtectedRoute';
-// import Profile from './pages/Profile';
-// import AppLayout from './components/AppLayout';
-// import Sidebar from './components/Sidebar';
 
 const LoginPage = lazy(() => import("./pages/Login"));
 const RegisterPage = lazy(() => import("./pages/Register"));
-const Logout = lazy(() => import("./pages/Logout"));
-const HomePage = lazy(() => import("./pages/Home"));
 const ErrorPage = lazy(() => import("./pages/Error"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
+const ContactPage = lazy(() => import("./pages/Contact"));
+const AllCoursePage = lazy(() => import("./pages/AllCourse"));
+const MyCoursePage = lazy(() => import("./pages/MyCourse"));
+
 
 function App() {
 
@@ -33,14 +32,24 @@ function App() {
             <Route path="/" exact element={<Navigate to="/login" />} />
             <Route path="/login" exact element={<LoginPage />} />
             <Route path="/register" exact element={<RegisterPage />} />
-            <Route path="/home" exact element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
-            } />
             <Route path="/profile" exact element={
               <ProtectedRoute>
                 <ProfilePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/contact" exact element={
+              <ProtectedRoute>
+                <ContactPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/myCourse" exact element={
+              <ProtectedRoute>
+                <MyCoursePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/allCourse" exact element={
+              <ProtectedRoute>
+                <AllCoursePage />
               </ProtectedRoute>
             } />
             <Route path="*" exact element={<ErrorPage />} />

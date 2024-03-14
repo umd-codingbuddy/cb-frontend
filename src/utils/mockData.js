@@ -39,75 +39,65 @@ export const sampleData = {
         requestBody: {
             firstName: 'anurag',
             lastName: 'kumar',
-            email: 'hey@gmail.com',
-            username: 'kareena',
-            password: 'kapoor',
-            role: 'ADMIN', // ADMIN or STUDENT OR INSTRUCTOR
+            location: "MD, USA",
+            githubUsername: "sachinvel",
+            linkedInUsername: "sachin-velmurugan",
             bio: 'whatever',
+            profileImage : '<file>'
         }
     },
-    'deleteUser': {
-        path: '/delete/{userId}',
-        method: 'DELETE'
+    'getUser': {
+        path: '/user/{userId}',
+        method: 'get',
+        response: {
+            firstName: 'anurag',
+            lastName: 'kumar',
+            location: "MD, USA",
+            bio: 'whatever',
+            githubUsername: "sachinvel", //optional
+            linkedInUsername: "sachin-velmurugan", //optional
+            profileImage : "https://fastly.picsum.photos/id/826/200/300.jpg?hmac=OsVdvGZW1U_-FFoJfJrFVB-9hw0tx1H9ZyEqEaA1W10" // give me a link
+        }
     },
-    'validateUserName': {
-        path: '/validate-username?username=anuragKumar',
-        method: 'GET'
-    },
-    'getUserCourse': {
-        path: '/getusercourse',
+    'getInstructor' : {
+        path: '/getCourseByInstructorId',
         method: 'get',
         token: '234sfsdafsg',
         response: [
             {
-                title: 'DSA',
-                image: 'base64String',
-                difficulty: 'easy',
-                Description: 'Learn DSA fundamentals',
+                id: '1',
+                name: 'john'
+            },
+            {
+                id: '2',
+                name: 'alex'
+            },
+        ]
+    },
+    'getCourseTitleByInstructorId': {
+        path: '/getCourseByInstructorId?id=1',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: [
+            {
+                title: 'DSA'
             },
             {
                 title: 'DSA',
-                image: 'base64String',
-                difficulty: 'easy',
-                Description: 'Learn DSA fundamentals',
             }
         ]
     },
-    'getAllCourse': {
-        path: '/getAllcourse',
-        method: 'get',
+    'contact': {
+        path: '/contact',
+        method: 'post',
         token: '234sfsdafsg',
-        response: [
+        requestBody: [
             {
-                title: 'DSA',
-                image: 'base64String',
-                difficulty: 'easy',
-                Description: 'Learn DSA fundamentals',
-            },
-            {
-                title: 'DSA',
-                image: 'base64String',
-                difficulty: 'easy',
-                Description: 'Learn DSA fundamentals',
-            }
-        ]
-    },
-    'deleteCourse': {
-        path: '/getusercourse',
-        method: 'get',
-        token: '234sfsdafsg',
-        response: [
-            {
-                title: 'DSA',
-                image: 'base64String',
-                difficulty: 'easy',
-                Description: 'Learn DSA fundamentals',
-            },
-            {
-                title: 'DSA',
-                image: 'base64String',
-                difficulty: 'easy',
-                Description: 'Learn DSA fundamentals',
+                senderId: 'DSA',
+                receiverId: 'base64String',
+                courseId: 'easy',
+                title: 'Learn DSA fundamentals',
+                message: 'Learn DSA fundamentals',
             }
         ]
     }

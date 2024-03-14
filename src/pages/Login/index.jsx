@@ -10,7 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 import PublicHeader from '../../components/PublicHeader';
 import styles from "./login.module.css";
 
-import PrimaryBtn from '../../components/PrimaryBtn';
+import { PrimaryBtn } from "../../components/StyledMUIElem";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -38,7 +38,7 @@ export default function Login({ setLoggedIn }) {
     setPassword(event.target.value);
   }
 
-  const displaySnackBar = (snackType,message) => {
+  const displaySnackBar = (snackType, message) => {
     setSnackType(snackType);
     setMessage(message);
     setIsSnackbarOpen(true);
@@ -46,6 +46,9 @@ export default function Login({ setLoggedIn }) {
 
   const signin = async (event) => {
     event.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     // const hashedPassword = bcrypt.hashSync(password, salt);
 
     // await backendCall.post('/api/v1/login', {
@@ -71,10 +74,8 @@ export default function Login({ setLoggedIn }) {
     //   }
     // });
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!emailRegex.test(email)) {
-      displaySnackBar('error','Kindly enter correct email address');
+      displaySnackBar('error', 'Kindly enter correct email address');
       return;
     }
 
@@ -83,9 +84,9 @@ export default function Login({ setLoggedIn }) {
     if (response.status == 1) {
       login(response.user);
     } else if (response.status == 2) {
-      displaySnackBar('error',"Kindly verify your email before logging in");
+      displaySnackBar('error', "Kindly verify your email before logging in");
     } else if (response.status == 3) {
-      displaySnackBar('error',response.errorMsg);
+      displaySnackBar('error', response.errorMsg);
     }
 
   }
@@ -126,7 +127,7 @@ export default function Login({ setLoggedIn }) {
       window.history.replaceState({}, '')
     }
     if (user != null) {
-      navigate("/home");
+      navigate("/profile");
     }
   }, [])
 

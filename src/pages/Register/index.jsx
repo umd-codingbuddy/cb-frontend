@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import PublicHeader from '../../components/PublicHeader';
 import styles from "./register.module.css";
 
-import PrimaryBtn from '../../components/PrimaryBtn';
+import {PrimaryBtn} from '../../components/StyledMUIElem';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

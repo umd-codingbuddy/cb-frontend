@@ -15,7 +15,8 @@ import BugReportIcon from '@mui/icons-material/BugReport';
 import Person2Icon from '@mui/icons-material/Person2';
 import { useAuth } from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import PrimaryBtn from "../PrimaryBtn";
+import { PrimaryBtn } from "../StyledMUIElem";
+
 
 export default function Header() {
 
@@ -64,7 +65,7 @@ export default function Header() {
                 >
                     <ToggleButton value="myCourse" aria-label="left aligned"
                         style={{
-                            color: 'black',
+                            color: menu === 'myCourse' ? 'white' : 'black',
                             border : "1px solid #111",
                             backgroundColor: menu === 'myCourse' ? '#2c086f' : 'transparent',
                         }}
@@ -73,7 +74,7 @@ export default function Header() {
                     </ToggleButton>
                     <ToggleButton value="allCourse" aria-label="centered"
                         style={{
-                            color: 'black',
+                            color: menu === 'allCourse' ? 'white' : 'black',
                             border : "1px solid #111",
                             backgroundColor: menu === 'allCourse' ? '#2c086f' : 'transparent',
                         }}
@@ -82,7 +83,7 @@ export default function Header() {
                     </ToggleButton>
                     <ToggleButton value="contact" aria-label="right aligned"
                         style={{
-                            color: 'black',
+                            color: menu === 'contact' ? 'white' : 'black',
                             border : "1px solid #111",
                             backgroundColor: menu === 'contact' ? '#2c086f' : 'transparent',
                         }}
@@ -91,7 +92,7 @@ export default function Header() {
                     </ToggleButton>
                     <ToggleButton value="profile" aria-label="justified"
                         style={{
-                            color: 'white',
+                            color: menu === 'profile' ? 'white' : 'black',
                             border : "1px solid #111",
                             backgroundColor: menu === 'profile' ? '#2c086f' : 'transparent',
                         }}
