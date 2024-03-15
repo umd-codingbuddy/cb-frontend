@@ -51,6 +51,27 @@ export const SecondaryBtn = ({ children, ...props }) => {
     );
 }
 
+const TransparentbuttonStyle = {
+    background: 'transparent', // Background color
+    padding: '8px 20px', // Padding on each side (adjust as needed)
+    color: '#3A10E5', // Text color
+    borderRadius: '4px', // Optional: Add border radius for rounded corners
+    transition: 'background-color 0.3s ease', // Smooth transition on hover
+    boxShadow : "none",
+    '&:hover': {
+        color: '#2c086f', // Darker background color on hover
+        textDecoration:"underline",
+        background: 'transparent',
+        boxShadow : "none"
+    },
+};
+
+export const TransparentBtn = ({ children, ...props }) => {
+    return (
+        <Button {...props} variant="contained" sx={TransparentbuttonStyle}>{children}</Button>
+    );
+}
+
 export const WhiteSelect = ({ children, ...props }) => {
     return (
         <Select

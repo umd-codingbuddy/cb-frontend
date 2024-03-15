@@ -1,0 +1,85 @@
+.courseContainer {
+    width: 90%;
+    margin: 20px 5%;
+}
+
+.courseTileParent {
+    width: 80%;
+    min-width: 550px;
+}
+
+.courseHeader {
+    width: 100%;
+}
+
+.courseTile {
+    width: 250px;
+    /* max-width: 800px; */
+    min-height: 300px;
+    margin: 20px 0px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: -8px 8px 0px #ddd;
+}
+
+.courseTileFooter {
+    padding: 20px;
+}
+
+.courseProgressContainer {
+    width: 30%;
+    max-width: 200px;
+}
+
+.courseDescription {
+    color: #666;
+    font-size: 13px;
+
+}
+
+.courseDetails {
+    display: block;
+    color: #666;
+    font-size: 13px;
+}
+
+.courseDetails b {
+    font-size: 15px;
+    color: #111;
+}
+
+.courseTitle {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+}
+
+.sideBar {
+    width: 20%;
+    min-width: 250px;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.difficultyFilter,
+.tagFilter {
+    margin-bottom: 30px;
+    border-bottom: 1px solid grey;
+}
+
+.difficultyFilter label,
+.tagFilter label {
+    display: block;
+    margin-bottom: 5px;
+}

@@ -100,6 +100,57 @@ export const sampleData = {
                 message: 'Learn DSA fundamentals',
             }
         ]
+    },
+    'getCourse': {
+        path: '/getCourse',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: [
+            {
+                id: 1,
+                name: 'Data Structures',
+                description: 'Introduction to problem solving using C and C++',
+                difficultyLevel: 'easy',
+                tags: ['Python','Java'],
+                percentageCompleted : 4
+                
+            },
+            {
+                id: 1,
+                name: 'Python Data Processing',
+                description: 'Data processing using python Numpy and Pandas',
+                difficultyLevel: 'easy',
+                tags: ['Python','Java'],
+                percentageCompleted : 20
+            }
+        ]
+    },
+    'getAllCourse': {
+        path: '/getAllCourse',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: [
+            {
+                id: 1,
+                name: 'Data Structures',
+                description: 'Introduction to problem solving using C and C++',
+                difficultyLevel: 'easy',
+                instructor:"Saul Goodman",
+                tags: ['Python','Java'],
+                percentageCompleted : 4,
+                totalModules:15
+            },
+            {
+                id: 1,
+                name: 'Python Data Processing',
+                description: 'Data processing using python Numpy and Pandas',
+                difficultyLevel: 'easy',
+                instructor:"Kim wexler",
+                tags: ['Python','Java'],
+                percentageCompleted : 20,
+                totalModules:15
+            }
+        ]
     }
 
 }

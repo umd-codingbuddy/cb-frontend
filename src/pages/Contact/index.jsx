@@ -22,8 +22,8 @@ export default function Contact() {
           <MenuItem value={10}>Sample Course</MenuItem>
         </WhiteSelect>
         <br></br>
-        <WhiteContainedTextField multiline={true} width="400px" label="Title" />
-        <WhiteContainedTextField multiline={true} width="400px" label="Message" />
+        <WhiteContainedTextField multiline={true} width="450px" label="Title" />
+        <WhiteContainedTextField multiline={true} width="450px" label="Message" />
         <br>
         </br>
         <Stack flexDirection="row" className={styles.imageStack} alignItems="center" justifyContent="space-evenly">
