@@ -1,0 +1,12 @@
+.dialogBox{
+    position: absolute;
+    backdrop-filter: blur(5px);
+}
+
+.dialogContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}

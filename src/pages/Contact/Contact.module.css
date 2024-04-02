@@ -1,0 +1,67 @@
+.contactContainer {
+    width: 50%;
+    margin: 0% 25%;
+}
+
+.messageContainer {
+    width: 80%;
+    margin: 10px 10%;
+    min-height: 500px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.messagePreviewContainer {
+    position: relative;
+    width: 30%;
+    border-right: 1px solid grey;
+    align-self: stretch;
+}
+
+.messageTile {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px 10px;
+    border-bottom: 1px solid grey;
+}
+
+.messageTile:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: #ffe0cc;
+}
+
+.messagePreviewContentText {
+    color: grey;
+    overflow: hidden;
+    height: 25px;
+    white-space: nowrap;
+    width: 100%;
+    margin: 5px 0px;
+    text-overflow: ellipsis;
+}
+
+.messagePreviewTitleText {
+    margin: 5px 0px;
+}
+
+.messagePreviewNameText {
+    font-size: 20px;
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
+.messagePreviewDateText {
+    color: #3a10e5;
+    margin: 10px 0px;
+}
+
+.messageContentContainer {
+    width: 70%;
+    align-self: stretch;
+    padding: 20px 30px;
+}
+
+.messageContent{
+    color: grey;
+}
