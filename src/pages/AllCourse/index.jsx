@@ -5,9 +5,11 @@ import { Box, Checkbox, Stack, Typography } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import styles from "./AllCourse.module.css";
 import { PrimaryBtn, TransparentBtn, WhiteContainedTextField } from '../../components/StyledMUIElem';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function AllCourse() {
 
+  const { user } = useAuth();
   const [courseList, setCourseList] = useState([]);
   useEffect(() => {
     //TODO: replace with actual getCourse API
@@ -15,6 +17,10 @@ export default function AllCourse() {
     setCourseList(response);
 
   }, []);
+
+  const isUserStudent = () => {
+    return user.role == "student";
+  }
 
   return (
     <>
@@ -58,7 +64,7 @@ export default function AllCourse() {
 
                     <Box textAlign="center">
                       <TransparentBtn>View Syllabus</TransparentBtn>
-                      <PrimaryBtn>Resume Learning </PrimaryBtn>
+                       { isUserStudent() &&  <PrimaryBtn>Resume Learning </PrimaryBtn>}
                     </Box>
                   </Stack>
                 )

@@ -12,13 +12,12 @@ const ProfilePage = lazy(() => import("./pages/Profile"));
 const ContactPage = lazy(() => import("./pages/Contact"));
 const AllCoursePage = lazy(() => import("./pages/AllCourse"));
 const MyCoursePage = lazy(() => import("./pages/MyCourse"));
+const CourseOutlinePage = lazy(() => import("./pages/CourseOutline"));
 
 
 function App() {
 
   return (
-
-
     <BrowserRouter>
       <AuthProvider>
         <Suspense
@@ -27,7 +26,6 @@ function App() {
               <CircularProgress sx={{ margin: "auto" }} />
             </Box>
           }>
-
           <Routes>
             <Route path="/" exact element={<Navigate to="/login" />} />
             <Route path="/login" exact element={<LoginPage />} />
@@ -52,17 +50,16 @@ function App() {
                 <AllCoursePage />
               </ProtectedRoute>
             } />
+            <Route path="/courseOutline" exact element={
+              <ProtectedRoute>
+                <CourseOutlinePage />
+              </ProtectedRoute>
+            } />
             <Route path="*" exact element={<ErrorPage />} />
           </Routes>
         </Suspense>
       </AuthProvider>
-
     </BrowserRouter>
-
-
-
-
-
   );
 }
 

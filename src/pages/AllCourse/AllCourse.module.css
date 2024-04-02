@@ -13,9 +13,9 @@
 }
 
 .courseTile {
-    width: 250px;
+    width: 300px;
     /* max-width: 800px; */
-    min-height: 300px;
+    min-height: 350px;
     margin: 20px 0px;
     padding: 20px 40px;
     border-radius: 10px;

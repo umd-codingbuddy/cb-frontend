@@ -21,6 +21,7 @@ const buttonStyle = {
     backgroundColor: '#3A10E5', // Background color
     padding: '8px 20px', // Padding on each side (adjust as needed)
     color: '#fff', // Text color
+    width:"fit-content",
     borderRadius: '4px', // Optional: Add border radius for rounded corners
     transition: 'background-color 0.3s ease', // Smooth transition on hover
     '&:hover': {

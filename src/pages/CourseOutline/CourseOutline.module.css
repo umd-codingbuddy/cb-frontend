@@ -1,0 +1,107 @@
+.bodyParent{
+    width : 90%;
+    margin : 20px 5%;
+}
+
+.bodyHeaderParent{
+    width: 100%;
+    
+}
+.bodyHeader{
+    width : 45%;
+}
+
+.moduleCountInfo{
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.courseTile{
+    width: 100%;
+    max-width: 800px;
+    min-height: 130px;
+    margin: 20px 0px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.courseTileFooter{
+    padding: 20px;
+}
+
+.courseProgressContainer{
+    width: 30%;
+    max-width: 200px;
+}
+
+.courseDescription{
+    color: #666;
+    font-size: 15px;
+}
+
+.courseTitle{
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+}
+
+.tagName{
+    width: fit-content;
+    height: 30px;
+    padding: 5px 10px;
+    margin: 5px 10px;
+    background-color: lightgrey;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+    border-radius: 5px;
+}
+
+.courseDescription {
+    color: grey;
+    overflow: hidden;
+    height: 25px;
+    white-space: nowrap;
+    width: 100%;
+    margin: 5px 0px;
+    text-overflow: ellipsis;
+}
+
+.syllabusParent{
+    width: 100%;
+    /* max-width: 700px; */
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.moduleName{
+    font-weight: 30;
+    font-size: 20px;
+}
+
+.moduleItem{
+    /* border-bottom: 1px solid gray; */
+    padding: 10px 20px;
+}
+
+.moduleItem:hover{
+    cursor: pointer;
+}
+
+.pagesCount{
+    font-size: 14px;
+    color: gray;
+}
+
+.pageContent{
+    padding: 5px;
+}
+
+.pageName{
+    font-size: 15px;
+    display: inline-block;
+}

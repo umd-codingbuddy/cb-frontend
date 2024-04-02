@@ -37,3 +37,17 @@
     display: block;
 }
 
+.tagName{
+    width: fit-content;
+    height: 30px;
+    padding: 5px 10px;
+    margin: 5px 10px;
+    background-color: lightgrey;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+    border-radius: 5px;
+}
+
