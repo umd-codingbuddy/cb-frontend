@@ -1,0 +1,12 @@
+.container {
+    width: 70%;
+    margin: 20px 15%;
+}
+
+.table {
+    min-width: 650px;
+}
+
+.headerCell {
+    font-weight: bold;
+}

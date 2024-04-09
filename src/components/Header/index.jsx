@@ -9,6 +9,7 @@ import {
     styled,
 } from "@mui/material";
 import styles from './header.module.css';
+import logo from "../../assets/images/cb-logo.png";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import BugReportIcon from '@mui/icons-material/BugReport';
@@ -53,7 +54,7 @@ export default function Header() {
     return (
         <Stack className={styles.headerContainer} flexDirection="row" alignItems="center" justifyContent="left">
             <Stack className={styles.logoContainer} flexDirection="row" alignItems="center" justifyContent="center">
-                <img className={styles.headerImage} src="./images/cb-logo.png" width={80} height={50} />
+                <img className={styles.headerImage} src={logo} width={80} height={50} />
                 <span className={styles.headerText}>Coding Buddy</span>
             </Stack>
             <Stack flexDirection="row" justifyContent="stretch">
@@ -63,42 +64,74 @@ export default function Header() {
                     className={styles.menuContainer}
                     onChange={(event) => { handleMenuChange(event.target.value) }}
                 >
-                    <ToggleButton value="myCourse" aria-label="left aligned"
-                        style={{
-                            color: menu === 'myCourse' ? 'white' : 'black',
-                            border : "1px solid #111",
-                            backgroundColor: menu === 'myCourse' ? '#2c086f' : 'transparent',
-                        }}
-                    >
-                        My Courses
-                    </ToggleButton>
+                    {
+                        user.role == "admin" &&
+                        <ToggleButton value="users" aria-label="left aligned"
+                            style={{
+                                color: menu === 'users' ? 'white' : 'black',
+                                border: "1px solid #111",
+                                backgroundColor: menu === 'users' ? '#2c086f' : 'transparent',
+                            }}
+                        >
+                            Users
+                        </ToggleButton>
+
+                    }
+
                     <ToggleButton value="allCourse" aria-label="centered"
                         style={{
                             color: menu === 'allCourse' ? 'white' : 'black',
-                            border : "1px solid #111",
+                            border: "1px solid #111",
                             backgroundColor: menu === 'allCourse' ? '#2c086f' : 'transparent',
                         }}
                     >
                         All Courses
                     </ToggleButton>
-                    <ToggleButton value="contact" aria-label="right aligned"
-                        style={{
-                            color: menu === 'contact' ? 'white' : 'black',
-                            border : "1px solid #111",
-                            backgroundColor: menu === 'contact' ? '#2c086f' : 'transparent',
-                        }}
-                    >
-                        Contact
-                    </ToggleButton>
-                    <ToggleButton value="profile" aria-label="justified"
-                        style={{
-                            color: menu === 'profile' ? 'white' : 'black',
-                            border : "1px solid #111",
-                            backgroundColor: menu === 'profile' ? '#2c086f' : 'transparent',
-                        }}
-                    >
-                        Profile
-                    </ToggleButton>
+
+                    {
+                        user.role != "admin" &&
+                        <ToggleButton value="myCourse" aria-label="left aligned"
+                            style={{
+                                color: menu === 'myCourse' ? 'white' : 'black',
+                                border: "1px solid #111",
+                                backgroundColor: menu === 'myCourse' ? '#2c086f' : 'transparent',
+                            }}
+                        >
+                            My Courses
+                        </ToggleButton>
+
+                    }
+
+                    {
+                        user.role != "admin" &&
+                        <ToggleButton value="contact" aria-label="right aligned"
+                            style={{
+                                color: menu === 'contact' ? 'white' : 'black',
+                                border: "1px solid #111",
+                                backgroundColor: menu === 'contact' ? '#2c086f' : 'transparent',
+                            }}
+                        >
+                            Contact
+                        </ToggleButton>
+
+                    }
+                    {
+                        user.role != "admin" &&
+                        <ToggleButton value="profile" aria-label="justified"
+                            style={{
+                                color: menu === 'profile' ? 'white' : 'black',
+                                border: "1px solid #111",
+                                backgroundColor: menu === 'profile' ? '#2c086f' : 'transparent',
+                            }}
+                        >
+                            Profile
+                        </ToggleButton>
+
+                    }
+
+
+
+
                 </ToggleButtonGroup>
             </Stack>
 

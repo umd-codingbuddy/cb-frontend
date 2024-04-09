@@ -1,0 +1,108 @@
+.textArea {
+    border: 1px solid red;
+    width: 100%;
+    height: 50%;
+}
+
+.outputArea {
+    border: 1px solid blue;
+    width: 100%;
+    height: 50%;
+    /* width: 100%; */
+}
+
+.codeArea {
+    border: 1px solid green;
+}
+
+.pageBody {
+    width: 100%;
+    height: calc(100% - 140px);
+    border: 1px solid black;
+    background-color: #15141F;
+    color: white;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    padding: 10px 0px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.leftPane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+}
+
+.rightPane {
+    flex: 1;
+    padding: 20px;
+}
+
+.questionSection {
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.outputSection {
+    flex: 1;
+}
+
+.codeSection {
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    height: 70px;
+    border-top: 1px solid #ccc;
+    background-color: #15141F;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.paper {
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: white;
+    /* color: #fff; */
+}
+
+.questionInput {
+    margin-bottom: 8px;
+}
+
+.optionInput {
+    margin-bottom: 8px;
+    width: 400px;
+}
+
+.optionContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
