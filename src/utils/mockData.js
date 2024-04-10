@@ -25,12 +25,43 @@ export const sampleData = {
             lastName: 'kumar',
             email: 'hey@gmail.com',
             password: 'kapoor',
-            role: 'ADMIN', // ADMIN or STUDENT OR INSTRUCTOR
+            role: 'STUDENT', // ADMIN or STUDENT OR INSTRUCTOR
             bio: 'whatever',
         },
         response: {
             status: 1, // 1=success, 2=error
             errorMsg: 'asdf', //use this message if status==2
+        }
+    },
+    'getUsers': {
+        path: '/getUsers',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            students: [
+                { id: 1, name: 'John Doe', email: 'john@example.com' },
+                { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+            ],
+            instructors: [
+                { id: 1, name: 'Alice Johnson', email: 'alice@example.com', verified: true },
+                { id: 2, name: 'Bob Williams', email: 'bob@example.com', verified: false }
+            ]
+        }
+    },
+    'deleteUser': {
+        path: '/deleteUser?id=12',
+        method: 'delete',
+        token: '234sfsdafsg',
+        response: {
+            message: "success"
+        }
+    },
+    'verifyInstructor': {
+        path: '/verifyInstructor?id=12',
+        method: 'put',
+        token: '234sfsdafsg',
+        response: {
+            message: "success"
         }
     },
     'updateUser': {
@@ -59,36 +90,31 @@ export const sampleData = {
             profileImage: "https://fastly.picsum.photos/id/826/200/300.jpg?hmac=OsVdvGZW1U_-FFoJfJrFVB-9hw0tx1H9ZyEqEaA1W10" // give me a link
         }
     },
-    'getInstructor': {
-        path: '/getCourseByInstructorId',
-        method: 'get',
+    'getInstructors': {
+        path: '/getInstructors',
+        method: 'post',
         token: '234sfsdafsg',
         response: [
-            {
-                id: '1',
-                name: 'john'
-            },
-            {
-                id: '2',
-                name: 'alex'
-            },
+            { id: 1, name: 'Alice Johnson', email: 'alice@example.com', verified: true },
+            { id: 2, name: 'Bob Williams', email: 'bob@example.com', verified: false }
         ]
     },
-    'getCourseTitleByInstructorId': {
-        path: '/getCourseByInstructorId?id=1',
-        method: 'get',
+    'getCourseByInstructor': {
+        path: '/getCourseByInstructor?insId=123234',
+        method: 'post',
         token: '234sfsdafsg',
-        response: [
-            {
-                title: 'DSA'
-            },
-            {
-                title: 'DSA',
-            }
-        ]
+        response: {
+            id: 1,
+            name: 'Data Structures',
+            description: 'Introduction to problem solving using C and C++',
+            difficultyLevel: 'easy',
+            tags: ['Python', 'Java'],
+            percentageCompleted: 4
+
+        }
     },
-    'contact': {
-        path: '/contact',
+    'sendMessage': {
+        path: '/sendMessage',
         method: 'post',
         token: '234sfsdafsg',
         requestBody: [
@@ -101,7 +127,21 @@ export const sampleData = {
             }
         ]
     },
-    'getCourse': {
+    'createCourse': {
+        path: '/createCourse',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: [
+            {
+                name: 'Data Structures',
+                description: 'Introduction to problem solving using C and C++',
+                difficultyLevel: 'easy',
+                tags: ['Python', 'Java']
+
+            }
+        ]
+    },
+    'getMyCourse': {
         path: '/getCourse',
         method: 'get',
         token: '234sfsdafsg',
@@ -200,27 +240,255 @@ export const sampleData = {
             name: 'Full Stack Development',
             description: 'Introduction to full stack application development',
             difficultyLevel: 'easy',
-            tags: ['Java','Software'],
+            tags: ['Java', 'Software'],
             percentageCompleted: 4,
             modules: [
                 {
                     name: "Elements and Structure",
-                    pages : [
-                        {name:"HTML content",type:"text",id:1},
-                        {name:"CSS content",type:"quiz",id:2}
+                    pages: [
+                        { name: "HTML content", type: "text", id: 1 },
+                        { name: "CSS content", type: "quiz", id: 2 }
                     ]
                 },
                 {
                     name: "Backend",
-                    pages : [
-                        {name:"Basic Java",type:"coding",id:3},
-                        {name:"Advanced Java",type:"text",id:4}
+                    pages: [
+                        { name: "Basic Java", type: "coding", id: 3 },
+                        { name: "Advanced Java", type: "text", id: 4 }
                     ]
                 }
             ]
 
         }
+    },
+    'createModule': {
+        path: '/createModule',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            courseId: 1,
+            name: "sdfsd"
+        }
+    },
+    'createPage': {
+        path: '/createPage',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            moduleId: 1,
+            name: "sdfsd",
+            isHintAllowed: true,
+            pageType: 'Coding',
+            Difficulty: "hard"
+        }
+    },
+    'getCodingPage': {
+        path: '/getCodingPage?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            id: 1,
+            courseId: 123,
+            name: 'HTML/CSS',
+            isHintAvailable: true,
+            content: {
+                text: "",
+                language: "python",
+                code: ""
+            }
+
+        }
+    },
+    'postCodingContent': {
+        path: '/postCodingContent?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            id: 1,
+            courseId: 123,
+            name: 'HTML/CSS',
+            isHintAvailable: true,
+            content: {
+                text: "",
+                language: "python",
+                code: "",
+                testCases: ""
+            }
+
+        }
+    },
+    'executeCoding': {
+        path: '/executeCoding?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            language: "python",
+            code: "",
+            testCases: ""
+        }
+    },
+    'getCurrentCoursePage': {
+        path: '/getCurrentCoursePage?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            pageId: 1,
+            type: "coding",
+        }
+    },
+    'completePage': {
+        path: '/completePage?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+    },
+    'getQuizPage': {
+        path: '/getCurrentCoursePage?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            questions: [
+                {
+                    seq: 1,
+                    question: "Is Java OOPS?",
+                    options: [
+                        { text: "Hello", isCorrect: true },
+                        { text: "World", isCorrect: false },
+                        { text: "Universe", isCorrect: false },
+                    ]
+                },
+                {
+                    seq: 2,
+                    question: "Is Java OOPS?",
+                    options: [
+                        { text: "Hello", isCorrect: true },
+                        { text: "World", isCorrect: false },
+                        { text: "Universe", isCorrect: false },
+                    ]
+                },
+                {
+                    seq: 3,
+                    question: "Is Java OOPS?",
+                    options: [
+                        { text: "Hello", isCorrect: true },
+                        { text: "World", isCorrect: false },
+                        { text: "Universe", isCorrect: false },
+                    ]
+                }
+            ]
+        }
+    },
+    'postQuizResult': {
+        path: '/quizResult?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            totalQuiz: 10,
+            correctCount: 5,
+            timeTaken: 1000,//in seconds
+        }
+    },
+    'postQuizContent': {
+        path: '/quizContent?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            questions: [
+                {
+                    seq: 1,
+                    question: "Is Java OOPS?",
+                    options: [
+                        { text: "Hello", isCorrect: true },
+                        { text: "World", isCorrect: false },
+                        { text: "Universe", isCorrect: false },
+                    ]
+                },
+                {
+                    seq: 2,
+                    question: "Is Java OOPS?",
+                    options: [
+                        { text: "Hello", isCorrect: true },
+                        { text: "World", isCorrect: false },
+                        { text: "Universe", isCorrect: false },
+                    ]
+                },
+                {
+                    seq: 3,
+                    question: "Is Java OOPS?",
+                    options: [
+                        { text: "Hello", isCorrect: true },
+                        { text: "World", isCorrect: false },
+                        { text: "Universe", isCorrect: false },
+                    ]
+                }
+            ]
+        }
+    },
+    'getTextPage': {
+        path: '/getTextPage?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            content: ""
+        }
+    },
+    'postTextContent': {
+        path: '/postQuizContent?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            content: "asdfaf"
+        }
+    },
+    'postTextResult': {
+        path: '/postTextResult?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            timeTaken: 12324,//seconds
+        }
+    },
+    'getNextPageId': {
+        path: '/getNextPageId?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            id: 1
+        }
+    },
+    'getPreviousPageId': {
+        path: '/getPreviousPageId?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            id: 1
+        }
+    },
+    'getCoursePerformance': {
+        path: '/getCoursePerformance?id=123',
+        method: 'get',
+        token: '234sfsdafsg',
+        response: {
+            totalModules: 30,
+            students: [
+                { studentId: 1, studentName: 'John Doe', modulesCompleted: 5, performanceScore: 80 },
+                { studentId: 2, studentName: 'Jane Smith', modulesCompleted: 4, performanceScore: 75 },
+                { studentId: 3, studentName: 'Alice Johnson', modulesCompleted: 6, performanceScore: 85 },
+                { studentId: 4, studentName: 'Bob Williams', modulesCompleted: 3, performanceScore: 70 },
+                { studentId: 5, studentName: 'Emma Davis', modulesCompleted: 7, performanceScore: 90 }
+            ]
+        }
+    },
+    'addStudentToCourse': {
+        path: '/addStudentToCourse?id=123',
+        method: 'post',
+        token: '234sfsdafsg',
+        requestBody: {
+            studentId: 12324,
+        }
     }
+
+
+
 
 
 }

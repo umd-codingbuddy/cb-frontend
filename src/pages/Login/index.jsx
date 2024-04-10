@@ -127,7 +127,11 @@ export default function Login({ setLoggedIn }) {
       window.history.replaceState({}, '')
     }
     if (user != null) {
-      navigate("/profile");
+      if (user.role == "admin") {
+        navigate("/users");
+      } else {
+        navigate("/profile");
+      }
     }
   }, [])
 

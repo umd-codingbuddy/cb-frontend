@@ -45,12 +45,16 @@ export default function MyCourse() {
 
   useEffect(() => {
     //TODO: replace with actual getCourse API
-    let response = sampleData['getCourse'].response;
+    let response = sampleData['getMyCourse'].response;
     setCourseList(response);
   }, []);
 
   const handleEditCourse = (id) => {
     navigate(`/courseOutline?id=${id}`);
+  }
+
+  const handleViewProgress = (id) => {
+    navigate(`/courseProgress?id=${id}`);
   }
 
   const openCreateCourseDialog = () => {
@@ -119,11 +123,12 @@ export default function MyCourse() {
                       </Box>
                     }
                   </Stack>
-                  <Stack flexDirection="row" className={styles.courseTileFooter} justifyContent="end">
+                  <Stack flexDirection="row" className={styles.courseTileFooter} gap={10} justifyContent="end">
                     {isUserStudent() && <TransparentBtn>View Syllabus</TransparentBtn>}
                     {isUserStudent() && <PrimaryBtn>Resume Learning </PrimaryBtn>}
 
                     {isUserInstructor() && <PrimaryBtn onClick={() => { handleEditCourse(course.id) }}>Edit Course </PrimaryBtn>}
+                    {isUserInstructor() && <PrimaryBtn onClick={() => { handleViewProgress(course.id) }}>View Student Progress </PrimaryBtn>}
 
                   </Stack>
 

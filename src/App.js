@@ -13,7 +13,11 @@ const ContactPage = lazy(() => import("./pages/Contact"));
 const AllCoursePage = lazy(() => import("./pages/AllCourse"));
 const MyCoursePage = lazy(() => import("./pages/MyCourse"));
 const CourseOutlinePage = lazy(() => import("./pages/CourseOutline"));
-
+const CodingPage = lazy(() => import("./pages/CodingPage"));
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const TextPage = lazy(() => import("./pages/TextPage"));
+const PerformancePage = lazy(() => import("./pages/Performance"));
+const UsersPage = lazy(() => import("./pages/Users"));
 
 function App() {
 
@@ -30,13 +34,18 @@ function App() {
             <Route path="/" exact element={<Navigate to="/login" />} />
             <Route path="/login" exact element={<LoginPage />} />
             <Route path="/register" exact element={<RegisterPage />} />
+            <Route path="/users" exact element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <UsersPage />
+              </ProtectedRoute>
+            } />
             <Route path="/profile" exact element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["student", "instructor"]}>
                 <ProfilePage />
               </ProtectedRoute>
             } />
             <Route path="/contact" exact element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["student", "instructor"]}>
                 <ContactPage />
               </ProtectedRoute>
             } />
@@ -53,6 +62,32 @@ function App() {
             <Route path="/courseOutline" exact element={
               <ProtectedRoute>
                 <CourseOutlinePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/page/coding" exact element={
+              <ProtectedRoute>
+                <CodingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/page/quiz" exact element={
+              <ProtectedRoute>
+                <QuizPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/page/text" exact element={
+              <ProtectedRoute>
+                <TextPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/courseProgress" exact element={
+              <ProtectedRoute>
+                <PerformancePage />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/courseProgress" exact element={
+              <ProtectedRoute>
+                <PerformancePage />
               </ProtectedRoute>
             } />
             <Route path="*" exact element={<ErrorPage />} />

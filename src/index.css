@@ -3,10 +3,15 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #FFF0E5;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 *{
   box-sizing: border-box;
+}
+
+#root{
+  height: 100%;
 }
 
 code {

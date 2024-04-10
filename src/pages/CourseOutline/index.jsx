@@ -36,23 +36,20 @@ const ModuleContent = ({ module, isUserInstructor, onAddPage }) => {
       </Stack>
 
       <ol className={"list"}>
-        {isOpen && module.pages.map((page) => {
-          return (
-            <li className={styles.pageContent}>
-              <span className={styles.pageName}>{page.name} - {page.type}</span>
-              { isUserInstructor && <TransparentBtn>Edit</TransparentBtn>}
-            </li>
-          )
-        })
+        {
+          isOpen && module.pages.map((page) => {
+            return (
+              <li className={styles.pageContent}>
+                <span className={styles.pageName}>{page.name} - {page.type}</span>
+                {isUserInstructor && <TransparentBtn>Edit</TransparentBtn>}
+              </li>
+            )
+          })
         }
 
         {isOpen && isUserInstructor && <PrimaryBtn onClick={onAddPage}>Add Page </PrimaryBtn>}
 
       </ol>
-
-
-
-
     </div>
   );
 };
@@ -69,6 +66,7 @@ export default function CourseOutline() {
   const isUserStudent = () => {
     return user.role == "student";
   }
+  
 
   const isUserInstructor = () => {
     return user.role == "instructor";
@@ -94,6 +92,11 @@ export default function CourseOutline() {
 
   const closeCreatePageDialog = () => {
     setIsCreatePageOpen(false);
+  }
+
+  const resumeCourse = ()=>{
+    let response = sampleData['getCurrentCoursePage'].response;
+    navigate(`/page/${response.type}?id=${response.pageId}`);
   }
 
   return (
@@ -139,7 +142,7 @@ export default function CourseOutline() {
             <Stack alignItems="center" className={styles.bodyHeaderParent} justifyContent="space-between" flexDirection="row">
               <Stack className={styles.bodyHeader} gap={2}>
                 <h2>{courseDetails.name}</h2>
-                {isUserInstructor() && <PrimaryBtn>Resume Course </PrimaryBtn>}
+                {isUserInstructor() && <PrimaryBtn onClick={resumeCourse}>Resume Course </PrimaryBtn>}
                 <span className={styles.courseDescription}>{courseDetails.description}</span>
               </Stack>
               <Stack className={styles.bodyHeader} >
