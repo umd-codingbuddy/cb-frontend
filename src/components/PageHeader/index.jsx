@@ -63,9 +63,9 @@ export default function PageHeader() {
                         <ToggleButton value="myCourse" className={styles.menuBtn} style={{ color: "white" }} aria-label="left aligned">
                             My Courses
                         </ToggleButton>
-                        <ToggleButton value="courseOutline" style={{ color: "white" }} aria-label="centered">
+                        {/* <ToggleButton value="courseOutline" style={{ color: "white" }} aria-label="centered">
                             Syllabus
-                        </ToggleButton>
+                        </ToggleButton> */}
                     </ToggleButtonGroup>
                 </Stack>
 

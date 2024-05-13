@@ -65,7 +65,7 @@ export default function Header() {
                     onChange={(event) => { handleMenuChange(event.target.value) }}
                 >
                     {
-                        user.role == "admin" &&
+                        user.role == "ADMIN" &&
                         <ToggleButton value="users" aria-label="left aligned"
                             style={{
                                 color: menu === 'users' ? 'white' : 'black',
@@ -89,7 +89,7 @@ export default function Header() {
                     </ToggleButton>
 
                     {
-                        user.role != "admin" &&
+                        user.role != "ADMIN" &&
                         <ToggleButton value="myCourse" aria-label="left aligned"
                             style={{
                                 color: menu === 'myCourse' ? 'white' : 'black',
@@ -103,7 +103,7 @@ export default function Header() {
                     }
 
                     {
-                        user.role != "admin" &&
+                        user.role != "ADMIN" &&
                         <ToggleButton value="contact" aria-label="right aligned"
                             style={{
                                 color: menu === 'contact' ? 'white' : 'black',
@@ -116,7 +116,7 @@ export default function Header() {
 
                     }
                     {
-                        user.role != "admin" &&
+                        user.role != "ADMIN" &&
                         <ToggleButton value="profile" aria-label="justified"
                             style={{
                                 color: menu === 'profile' ? 'white' : 'black',

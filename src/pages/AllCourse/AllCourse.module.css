@@ -1,21 +1,41 @@
 .courseContainer {
-    width: 90%;
-    margin: 20px 5%;
+    width: 100%;
+    height: calc(100% - 100px);
+    padding: 20px;
 }
 
 .courseTileParent {
     width: 80%;
     min-width: 550px;
+    height: 100%;
+    overflow: scroll;
 }
 
 .courseHeader {
     width: 100%;
 }
 
+.enrolledCourseTile {
+    border-color: green;
+}
+
+.enrolledIndicator {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: right;
+}
+
 .courseTile {
     width: 300px;
+    position: relative;
     /* max-width: 800px; */
-    min-height: 350px;
+    height: 350px;
     margin: 20px 0px;
     padding: 20px 40px;
     border-radius: 10px;
