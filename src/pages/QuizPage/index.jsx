@@ -281,6 +281,7 @@ export default function QuizPage() {
         <Container>
           {isUserInstructor() ? (
             <Beak
+            
               __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
               instructions={instructorBot}
             >
