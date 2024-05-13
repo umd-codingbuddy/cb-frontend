@@ -8,6 +8,8 @@ import { Editor } from '@tinymce/tinymce-react';
 
 // import ChatbotTask from "../../components/ChatbotTask";
 
+import CryptoJS from 'crypto-js';
+
 import { AssistantWindow, Beak, useBeakFunction } from "@beakjs/react";
 
 import {
@@ -92,7 +94,7 @@ export default function CodingPage() {
   const sendScore = async () => {
     let endTime = Date.now();
 
-    let timeDif = Math.floor((endTime - startTime)/1000);
+    let timeDif = Math.floor((endTime - startTime) / 1000);
     let score = 100;
     if (timeDif < 60) {
       score = 100;
@@ -222,6 +224,13 @@ export default function CodingPage() {
     // }
   };
 
+  const decryptApiKey = (encryptedKey) => {
+    const passphrase = 'your-secure-passphrase';  // Must be the same passphrase used for encryption
+    const bytes = CryptoJS.AES.decrypt(encryptedKey, passphrase);
+    const originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
+  };
+
   return (
     <>
       <PageHeader />
@@ -233,7 +242,7 @@ export default function CodingPage() {
           {isUserInstructor() ? (
 
             <Beak
-              __unsafeOpenAIApiKey__="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"
+              __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
               instructions={instructorBot}
             >
               {
@@ -241,7 +250,7 @@ export default function CodingPage() {
               }
               <Editor
                 onInit={(evt, editor) => editorRef.current = editor}
-                apiKey='1vbd7cyncb8d8rehwu3ip7x2gfj3okr0nbx603ev076paq2o'
+                apiKey={decryptApiKey(process.env.REACT_APP_EDITOR_KEY)}
                 value={content}
                 init={{
                   height: '100%',
@@ -265,7 +274,7 @@ export default function CodingPage() {
             </Beak>
           ) : (
             <Beak
-              __unsafeOpenAIApiKey__="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"
+              __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
               instructions={studentBot}
             >
               {
@@ -276,7 +285,7 @@ export default function CodingPage() {
                   editorRef.current = editor;
                   handleEditorScroll();
                 }}
-                apiKey='1vbd7cyncb8d8rehwu3ip7x2gfj3okr0nbx603ev076paq2o'
+                apiKey={decryptApiKey(process.env.REACT_APP_EDITOR_KEY)}
                 value={content}
                 init={{
                   height: '100%',

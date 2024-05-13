@@ -8,6 +8,7 @@ import PageHeader from '../../components/PageHeader';
 
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
+import CryptoJS from 'crypto-js';
 
 // import ChatBotTask from '../../ChatBotTask';
 
@@ -198,7 +199,7 @@ export default function QuizPage() {
       return acc + (selectedOption && selectedOption.isCorrect ? 1 : 0);
     }, 0);
 
-    let score = (correctCount/quizzes.length)*100;
+    let score = (correctCount / quizzes.length) * 100;
 
     try {
       await backendCall.post('/api/v1/academics/calculateScore', {
@@ -238,10 +239,10 @@ export default function QuizPage() {
 
   }
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     let endTime = Date.now();
     setEndTime(Date.now());
-    
+
 
     await sendScore();
     getNextPage();
@@ -266,6 +267,13 @@ export default function QuizPage() {
 
   }, []);
 
+  const decryptApiKey = (encryptedKey) => {
+    const passphrase = 'your-secure-passphrase';  // Must be the same passphrase used for encryption
+    const bytes = CryptoJS.AES.decrypt(encryptedKey, passphrase);
+    const originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
+  };
+
   return (
     <>
       <PageHeader />
@@ -273,7 +281,7 @@ export default function QuizPage() {
         <Container>
           {isUserInstructor() ? (
             <Beak
-              __unsafeOpenAIApiKey__="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"
+              __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
               instructions={instructorBot}
             >
 
@@ -323,7 +331,7 @@ export default function QuizPage() {
             </Beak>
           ) : (
             <Beak
-              __unsafeOpenAIApiKey__="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"
+              __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
               instructions={studentBot}
             >
               {

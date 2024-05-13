@@ -13,6 +13,7 @@ import MonacoEditor from 'react-monaco-editor';
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CryptoJS from 'crypto-js';
 
 
 
@@ -71,6 +72,13 @@ export default function CodingPage() {
     setMessage(message);
     setIsSnackbarOpen(true);
   }
+
+  const decryptApiKey = (encryptedKey) => {
+    const passphrase = 'your-secure-passphrase';  // Must be the same passphrase used for encryption
+    const bytes = CryptoJS.AES.decrypt(encryptedKey, passphrase);
+    const originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
+  };
 
   const executeCoding = async () => {
     try {
@@ -204,6 +212,16 @@ export default function CodingPage() {
     getCodingPage(pageId);
     // let response = sampleData['getContentPage'].response;
 
+    const passphrase = 'your-secure-passphrase';
+
+    // API Key to encrypt
+    const apiKey = '1vbd7cyncb8d8rehwu3ip7x2gfj3okr0nbx603ev076paq2o';
+
+    // Encrypt the API Key
+    const encrypted = CryptoJS.AES.encrypt(apiKey, passphrase).toString();
+
+    console.log('Encrypted API Key:', encrypted);
+
   }, []);
 
   const handleSave = () => {
@@ -323,7 +341,7 @@ export default function CodingPage() {
             {isUserInstructor() ? (
 
               <Beak
-                __unsafeOpenAIApiKey__="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"
+                __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
                 instructions={instructorBot}
               >
                 {
@@ -335,7 +353,7 @@ export default function CodingPage() {
                 }
                 <Editor
                   onInit={(evt, editor) => editorRef.current = editor}
-                  apiKey='1vbd7cyncb8d8rehwu3ip7x2gfj3okr0nbx603ev076paq2o'
+                  apiKey={decryptApiKey(process.env.REACT_APP_EDITOR_KEY)}
                   value={text}
                   init={{
                     height: '100%',
@@ -358,7 +376,7 @@ export default function CodingPage() {
               </Beak>
             ) : (
               <Beak
-                __unsafeOpenAIApiKey__="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"
+                __unsafeOpenAIApiKey__={decryptApiKey(process.env.REACT_APP_OPENAPI_KEY)}
                 instructions={studentBot}
               >
                 {
@@ -371,7 +389,7 @@ export default function CodingPage() {
                 }
                 <Editor
                   onInit={(evt, editor) => editorRef.current = editor}
-                  apiKey='1vbd7cyncb8d8rehwu3ip7x2gfj3okr0nbx603ev076paq2o'
+                  apiKey={decryptApiKey(process.env.REACT_APP_EDITOR_KEY)}
                   value={text}
                   init={{
                     height: '100%',
