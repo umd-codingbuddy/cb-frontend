@@ -212,16 +212,6 @@ export default function CodingPage() {
     getCodingPage(pageId);
     // let response = sampleData['getContentPage'].response;
 
-    const passphrase = 'your-secure-passphrase';
-
-    // API Key to encrypt
-    const apiKey = '1vbd7cyncb8d8rehwu3ip7x2gfj3okr0nbx603ev076paq2o';
-
-    // Encrypt the API Key
-    const encrypted = CryptoJS.AES.encrypt(apiKey, passphrase).toString();
-
-    console.log('Encrypted API Key:', encrypted);
-
   }, []);
 
   const handleSave = () => {
