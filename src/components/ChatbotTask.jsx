@@ -1,6 +1,7 @@
 import { useBeakFunction, useBeakInfo } from "@beakjs/react";
+import { useEffect } from "react";
 
-export default function ChatbotTask() {
+export default function ChatbotTask({ chatbotContent, chatbotContentKey, onCountCallback }) {
     //   const [message, setMessage] = useState("Hello World!");
 
     //   useBeakFunction({
@@ -23,20 +24,29 @@ export default function ChatbotTask() {
 
     useBeakFunction({
         name: "getUserText",
-        description: "This function provides any text typed by user in AI assistant window.",
+        description: "This function notifies if a user asked for a prompt in the chat window ",
         parameters: {
-            message: {
-                description: "provide user typed texts.",
+            count: {
+                description: "provide count on how much time user asked for help",
             },
         },
-        handler: ({ message }) => {
+        handler: ({ count }) => {
             // setMessage(message);
-            console.log("message : ",message);
-            return `Updated the message to: "${message}"`;
+            console.log("message : ", count);
+            onCountCallback(count);
+            return `Updated the message to: "${count}"`;
         },
     });
 
-    useBeakInfo("current message", "Hello world!");
+    useBeakInfo(chatbotContentKey, chatbotContent);
+
+    // useEffect(() => {
+    //     if (getUserText) {
+    //         useBeakInfo("task", "execute getUserText and give me the count of how much AI is used");
+    //     }
+    // }, [getUserText])
+
+
 
     return <div></div>;
 }

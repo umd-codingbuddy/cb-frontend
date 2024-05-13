@@ -23,9 +23,14 @@
     color: white;
     border-top: 1px solid #ccc;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     overflow: scroll;
     padding: 10px 0px;
+}
+
+.bodyContainer{
+    height: 100%;
 }
 
 .container {
@@ -48,7 +53,8 @@
 
 .footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap:100px;
     padding: 10px;
     height: 70px;
     border-top: 1px solid #ccc;

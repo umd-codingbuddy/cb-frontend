@@ -51,43 +51,63 @@ export default function Login({ setLoggedIn }) {
 
     // const hashedPassword = bcrypt.hashSync(password, salt);
 
-    // await backendCall.post('/api/v1/login', {
-    //   email: email,
-    //   password: password,
-    // }).then((res) => {
-    //   // window.localStorage.setItem('token', res.data.token);
-    //   window.localStorage.setItem('token', res.data.token);
-    //   window.localStorage.setItem('role', res.data.role);
-    //   setLoggedIn(true);
-    //   navigate('/course', {
-    //     state: {
-    //       isLoginSuccessful: true
-    //     }
-    //   });
-    //   // window.location = '/outing';
-    // }).catch((err) => {
-    //   console.log('login error : ', err);
-    //   if (err.response && err.response.data && err.response.data.error) {
-    //     setMessage(err.response.data.error);
-    //     setSnackType('error');
-    //     setIsSnackbarOpen(true);
-    //   }
-    // });
+    await backendCall.post('/api/v1/auth/login', {
+      username: email,
+      password: password,
+    }).then((response) => {
+      let data = response.data;
+      console.log("login response : ", response);
+      
+      login(data.user);
+    }).catch((err) => {
+      console.log('login error : ', err);
+      displaySnackBar('error', "Bad Credentials");
+    });
 
     if (!emailRegex.test(email)) {
       displaySnackBar('error', 'Kindly enter correct email address');
       return;
     }
 
-    let response = sampleData['login'].response;
+    // let response = sampleData['login'].response;
 
-    if (response.status == 1) {
-      login(response.user);
-    } else if (response.status == 2) {
-      displaySnackBar('error', "Kindly verify your email before logging in");
-    } else if (response.status == 3) {
-      displaySnackBar('error', response.errorMsg);
-    }
+    // if (response.status == 1) {
+    //   login(response.user);
+    // } else if (response.status == 2) {
+    //   displaySnackBar('error', "Bad Credentials");
+    // } else if (response.status == 3) {
+    //   displaySnackBar('error', response.errorMsg);
+    // }
+
+
+    // let data = JSON.stringify({
+    //   "username": "velsachin",
+    //   "password": "Smile*32"
+    // });
+
+    // backendCall.post('/api/v1/auth/login', data, {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   maxBodyLength: Infinity,
+    // }).then((response) => {
+    //   console.log(JSON.stringify(response.data));
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+
+    // console.log(response);
+
+    // if (response.data.response.status === 1) {
+    //   console.log('Login Successful', response.data.response.user);
+    //   // Save the token and user info to local storage or context
+    // } else if (response.data.response.status === 2) {
+    //   console.error('Error:', response.data.response.errorMsg);
+    // } else {
+    //   console.error('Login failed');
+    // }
+
+
 
   }
 
@@ -127,7 +147,7 @@ export default function Login({ setLoggedIn }) {
       window.history.replaceState({}, '')
     }
     if (user != null) {
-      if (user.role == "admin") {
+      if (user.role == "ADMIN") {
         navigate("/users");
       } else {
         navigate("/profile");

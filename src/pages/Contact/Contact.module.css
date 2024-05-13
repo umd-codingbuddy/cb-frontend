@@ -1,67 +1,128 @@
 .contactContainer {
     width: 50%;
-    margin: 0% 25%;
+    margin: auto;
+    /* Centering */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
 }
 
 .messageContainer {
     width: 80%;
-    margin: 10px 10%;
-    min-height: 500px;
-    border-radius: 5px;
-    border: 1px solid grey;
+    margin: 20px auto;
+    /* Center and add more space */
+    padding: 20px;
+    background-color: #fff;
+    /* Light background for the content area */
+    border-radius: 8px;
+    overflow: hidden;
+    height: 80%;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Consistent shadow */
+}
+
+.messageTile.selected {
+    /* Style for selected message */
+    background-color: #e0f7fa;
+    border-left: 4px solid #4caf50;
 }
 
 .messagePreviewContainer {
-    position: relative;
     width: 30%;
+    max-height: 100%;
+    overflow: scroll;
     border-right: 1px solid grey;
     align-self: stretch;
 }
 
 .messageTile {
-    width: 100%;
-    min-height: 100px;
-    padding: 10px 10px;
-    border-bottom: 1px solid grey;
+    padding: 15px;
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
+    cursor: pointer;
 }
 
 .messageTile:hover {
-    opacity: 0.8;
-    cursor: pointer;
-    background-color: #ffe0cc;
+    background-color: #f4f4f4;
+    /* Lighter hover effect */
 }
 
-.messagePreviewContentText {
-    color: grey;
-    overflow: hidden;
-    height: 25px;
-    white-space: nowrap;
-    width: 100%;
-    margin: 5px 0px;
-    text-overflow: ellipsis;
-}
-
-.messagePreviewTitleText {
-    margin: 5px 0px;
+.messagePreviewContentText,
+.messageContent {
+    color: #666;
+    height: 100%;
+    /* Softer color for text */
 }
 
 .messagePreviewNameText {
-    font-size: 20px;
-    margin: 10px 0px;
-    font-weight: bold;
+    font-size: 18px;
+    /* Slightly smaller for balance */
 }
 
 .messagePreviewDateText {
     color: #3a10e5;
-    margin: 10px 0px;
+    font-style: italic;
+    width: 60px;
+    display: inline-block;
+    /* Style emphasis */
 }
 
 .messageContentContainer {
     width: 70%;
-    align-self: stretch;
-    padding: 20px 30px;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    overflow-y: auto;
+    /* Adds scrolling to the content area */
 }
 
-.messageContent{
-    color: grey;
+.messageHeader {
+    margin-bottom: 10px;
+    /* Space between header items and body */
+    color: #333;
+    /* Dark color for header text */
+    font-weight: normal;
+}
+
+.messageBody {
+    white-space: pre-wrap;
+    /* Maintains formatting and line breaks */
+    /* color: #666; Lighter color for body text */
+    width: 100%;
+    /* Full width within container */
+    text-align: left;
+    /* Ensures text aligns to the left */
+    margin-top: 20px;
+    /* Space above the message body */
+}
+
+
+.messageContent {
+    line-height: 1.6;
+    /* Improve readability */
+    text-align: justify;
+    /* Improve flow */
+}
+
+/* Additional styling for form elements and buttons */
+.WhiteSelect,
+.WhiteContainedTextField {
+    margin-bottom: 10px;
+    /* Add spacing between form elements */
+}
+
+.PrimaryBtn {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    /* Green for actions */
+    color: white;
+}
+
+.PrimaryBtn:hover {
+    background-color: #45a049;
+    /* Darken on hover */
 }

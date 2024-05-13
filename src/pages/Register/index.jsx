@@ -15,7 +15,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 
-export default function Register({ setLoggedIn }) {
+export default function Register() {
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -151,26 +151,25 @@ export default function Register({ setLoggedIn }) {
   const register = async () => {
 
     if (validateForm()) {
-      // await backendCall.post('/api/v1/register',
-      //   {
-      //     password: password,
-      //     firstName: firstName,
-      //     lastName: lastName,
-      //     email: email,
-      //     role: role,
-      //     bio: bio
-      //   }
-      // ).then((res) => {
-      //   window.localStorage.removeItem('token');
-      //   setLoggedIn(false);
-      //   navigate('/login', {
-      //     state: { isRegisterSuccess: true }
-      //   });
-      // }).catch((err) => {
-      //   console.log('err : ', err);
-      //   setErrorMessage(err.response.data.error);
-      //   setIsErrSnackbarOpen(true);
-      // });
+      await backendCall.post('/api/v1/auth/register',
+        {
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          role: role,
+          bio: bio
+        }
+      ).then((res) => {
+        window.localStorage.removeItem('token');
+        navigate('/login', {
+          state: { isRegisterSuccess: true }
+        });
+      }).catch((err) => {
+        console.log('err : ', err);
+        setErrorMessage(err.response.data.error);
+        setIsErrSnackbarOpen(true);
+      });
     }
   }
 
@@ -275,7 +274,10 @@ export default function Register({ setLoggedIn }) {
             color="primary"
             size="small"
             disabled={email === '' || password === ''}
-            onClick={register}
+            onClick={()=>{
+              console.log("Hello");
+              register();
+            }}
             sx={{ padding: "10px 20px" }}
           >
             Register

@@ -35,17 +35,17 @@ function App() {
             <Route path="/login" exact element={<LoginPage />} />
             <Route path="/register" exact element={<RegisterPage />} />
             <Route path="/users" exact element={
-              <ProtectedRoute allowedRoles={["admin"]}>
+              <ProtectedRoute allowedRoles={["ADMIN"]}>
                 <UsersPage />
               </ProtectedRoute>
             } />
             <Route path="/profile" exact element={
-              <ProtectedRoute allowedRoles={["student", "instructor"]}>
+              <ProtectedRoute allowedRoles={["STUDENT", "INSTRUCTOR"]}>
                 <ProfilePage />
               </ProtectedRoute>
             } />
             <Route path="/contact" exact element={
-              <ProtectedRoute allowedRoles={["student", "instructor"]}>
+              <ProtectedRoute allowedRoles={["STUDENT", "INSTRUCTOR"]}>
                 <ContactPage />
               </ProtectedRoute>
             } />

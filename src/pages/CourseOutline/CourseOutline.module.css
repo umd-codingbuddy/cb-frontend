@@ -1,22 +1,91 @@
-.bodyParent{
-    width : 90%;
-    margin : 20px 5%;
+.bodyParent {
+    width: 90%;
+    margin: 20px 5%;
 }
 
-.bodyHeaderParent{
+.bodyHeaderParent {
     width: 100%;
+
+}
+
+.bodyHeader {
+    width: 45%;
+}
+
+.pageTypeLecture {
+    background-color: #007BFF;
+    /* A lighter green background */
+    font-size: 12px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
     
 }
-.bodyHeader{
-    width : 45%;
+
+.pageTypeQuiz {
+    background-color: #28A745;
+    /* A lighter green background */
+    font-size: 12px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
-.moduleCountInfo{
+.pageTypeInteractive {
+    background-color: #FFC107;
+    /* A lighter green background */
+    font-size: 12px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    /* color: #FFC107; Orange */
+}
+
+.pageTypeOther {
+    color: #6C757D; /* Grey */
+}
+
+
+.addPageBtn {
+    min-width: 85px !important;
+    padding: 5px 2px !important;
+    margin: 0px 10px;
+    /* text-decoration: underline; */
+}
+
+.editIcon {
+    min-width: 40px !important;
+    padding: 5px 2px !important;
+    margin: 0px 10px;
+    /* border: 1px solid red; */
+}
+
+.moduleCountInfo {
     padding: 10px;
     border-bottom: 1px solid gray;
 }
 
-.courseTile{
+.moduleItem.active {
+    /* background-color: #f0f0f0; */
+    /* Light gray background for the current module */
+}
+
+.pageContent.activePage {
+    font-weight: bold;
+    /* Bold text for the current page */
+}
+
+.currentIndicator {
+    background-color: #66bb6a;
+    /* A lighter green background */
+    font-size: 12px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+
+}
+
+.courseTile {
     width: 100%;
     max-width: 800px;
     min-height: 130px;
@@ -26,27 +95,27 @@
     background-color: white;
 }
 
-.courseTileFooter{
+.courseTileFooter {
     padding: 20px;
 }
 
-.courseProgressContainer{
+.courseProgressContainer {
     width: 30%;
     max-width: 200px;
 }
 
-.courseDescription{
+.courseDescription {
     color: #666;
     font-size: 15px;
 }
 
-.courseTitle{
+.courseTitle {
     font-size: 20px;
     font-weight: bold;
     display: block;
 }
 
-.tagName{
+.tagName {
     width: fit-content;
     height: 30px;
     padding: 5px 10px;
@@ -70,7 +139,7 @@
     text-overflow: ellipsis;
 }
 
-.syllabusParent{
+.syllabusParent {
     width: 100%;
     /* max-width: 700px; */
     background-color: white;
@@ -78,30 +147,31 @@
     border-radius: 10px;
 }
 
-.moduleName{
+.moduleName {
     font-weight: 30;
     font-size: 20px;
+    position: relative;
 }
 
-.moduleItem{
+.moduleItem {
     /* border-bottom: 1px solid gray; */
     padding: 10px 20px;
 }
 
-.moduleItem:hover{
+.moduleItem:hover {
     cursor: pointer;
 }
 
-.pagesCount{
+.pagesCount {
     font-size: 14px;
     color: gray;
 }
 
-.pageContent{
+.pageContent {
     padding: 5px;
 }
 
-.pageName{
+.pageName {
     font-size: 15px;
     display: inline-block;
 }
